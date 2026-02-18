@@ -20,8 +20,7 @@ Press Play
 Press Spacebar to jump
 Your cube should only jump when touching the ground
 ```
-###
-**Program **
+### Program 
 ```
 using UnityEngine;
 
@@ -29,7 +28,8 @@ public class PlayerJump : MonoBehaviour
 {
     private Rigidbody rb;
     public float jumpForce = 5f;
-    
+    private bool isGrounded;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -37,25 +37,26 @@ public class PlayerJump : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) )
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            
+            isGrounded = false;
         }
     }
 
-   
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
 }
+
 ```
 ### Output:
 
-
-
-
-
-
-
-
+<img width="1919" height="1170" alt="image" src="https://github.com/user-attachments/assets/60258360-ce8a-486d-93b2-26174ea467f3" />
 
 ### Result:
 Thus the simple jumping behavior was implemented successfully.
