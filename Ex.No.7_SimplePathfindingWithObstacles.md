@@ -29,29 +29,28 @@ Go to: Inspector → Add Component → NavMeshObstacle and Check: ✅ "Carve"
 ```  
 ### Program:
 ```
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEngine.GraphicsBuffer;
 
 public class AIPathfinder : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public Transform target; // Assign the target in the Inspector
+    public Transform target;
     private NavMeshAgent agent;
+
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>(); // Get the NavMeshAgent
+        agent = GetComponent<NavMeshAgent>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        agent.SetDestination(target.position);
+        if (target != null)
+        {
+            agent.SetDestination(target.position);
+        }
     }
 }
-#Moving Obstacle
+#Moving Obstacle (optional)
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -80,7 +79,9 @@ float movement = Mathf.PingPong(Time.time * moveSpeed, moveDistance) - moveDista
 transform.position = startPos + new Vector3(movement, 0, 0);
 ### Output:
 
+<img width="1919" height="1136" alt="image" src="https://github.com/user-attachments/assets/20798d77-ed62-4231-965f-8f4971a0768d" />
 
+<img width="1917" height="1138" alt="image" src="https://github.com/user-attachments/assets/41e7012c-c189-40af-8577-678fc14cfbfe" />
 
 
 
